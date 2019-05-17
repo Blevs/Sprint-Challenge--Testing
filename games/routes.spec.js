@@ -35,7 +35,7 @@ describe('Games Routes /api/games', () => {
       const testGame2 = {title: 'TestGame2', genre: 'TestGenre2'};
       res = await request(server)
             .post('/api/games/')
-            .send(testGame);
+            .send(testGame2);
       expect(res.body.title).toBe(testGame2.title);
       expect(res.body.genre).toBe(testGame2.genre);
       expect(res.body.releaseYear).toBe(null);
