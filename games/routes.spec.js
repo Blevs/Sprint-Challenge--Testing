@@ -55,4 +55,32 @@ describe('Games Routes /api/games', () => {
       expect(status).toBe(422);
     });
   });
+
+  describe('get', () => {
+    it('get works', async () => {
+      const {status} = await request(server).get('/api/games/');
+      expect(status).toEqual(200);
+    });
+    it('get seed games in db', async () => {
+      const seeds = [
+        {id: 1, title: 'Pacman', genre: 'Arcade', releaseYear: 1980},
+        {id: 2, title: 'Put Put Save the Zoo', genre: 'Adventure'}
+      ];
+      const {body} = await request(server).get('/api/games/');
+      expect(body).toEqual(seeds);
+    });
+    it('get retrives new games', async () => {
+      const testGame = {title: 'TestGame', genre: 'TestGenre', releaseYear: 2000};
+      const contents = [
+        {id: 1, title: 'Pacman', genre: 'Arcade', releaseYear: 1980},
+        {id: 2, title: 'Put Put Save the Zoo', genre: 'Adventure'},
+        testGame
+      ];
+      await request(server)
+            .post('/api/games/')
+            .send(testGame);
+      const {body} = await request(server).get('/api/games/');
+      expect(body).toEqual(contents);
+    });
+  });
 });
