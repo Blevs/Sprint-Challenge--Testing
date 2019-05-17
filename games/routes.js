@@ -14,4 +14,10 @@ router.post('/', (req, res) => {
   }
 });
 
+router.get('/', (req, res) => {
+  db('games')
+    .then(games => res.status(200).json(games))
+    .catch(() => res.status(500).json({message: 'Error retrieving games'}));
+});
+
 module.exports = router;

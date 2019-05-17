@@ -64,16 +64,16 @@ describe('Games Routes /api/games', () => {
     it('get seed games in db', async () => {
       const seeds = [
         {id: 1, title: 'Pacman', genre: 'Arcade', releaseYear: 1980},
-        {id: 2, title: 'Put Put Save the Zoo', genre: 'Adventure'}
+        {id: 2, title: 'Put Put Save the Zoo', genre: 'Adventure', releaseYear: null}
       ];
       const {body} = await request(server).get('/api/games/');
       expect(body).toEqual(seeds);
     });
     it('get retrives new games', async () => {
-      const testGame = {title: 'TestGame', genre: 'TestGenre', releaseYear: 2000};
+      const testGame = {title: 'TestGame', genre: 'TestGenre', releaseYear: 2000, id: 3};
       const contents = [
         {id: 1, title: 'Pacman', genre: 'Arcade', releaseYear: 1980},
-        {id: 2, title: 'Put Put Save the Zoo', genre: 'Adventure'},
+        {id: 2, title: 'Put Put Save the Zoo', genre: 'Adventure', releaseYear: null},
         testGame
       ];
       await request(server)
